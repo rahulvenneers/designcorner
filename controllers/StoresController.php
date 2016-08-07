@@ -101,10 +101,57 @@ class StoresController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model=$this->findModel($id);
+        $model->is_deleted="yes";
+        $model->save();
         return $this->redirect(['index']);
     }
+    
+    
+    public function actionList($id){
+        $countStores=  Stores::find()
+                ->where(['emirates_id'=>$id])
+                ->count();
+        $stores=Stores::find()
+                ->where(['emirates_id'=>$id])
+                ->all();
+        if($countStores>0){
+            echo "<option>SELECT STORE</option>";
+            foreach ($stores as $store){
+                echo '<option value='.$store->id.'>'.$store->name.'</option>';
+            }
+        }
+        else{
+            echo "<option>SELECT STORE</option>";
+            echo "<option>no store found</option>";
+        }
+    }
+    public function actionListpromotion($id){
+        $countStores=  Stores::find()
+                ->where(['emirates_id'=>$id])
+                ->count();
+        $stores=Stores::find()
+                ->where(['emirates_id'=>$id])
+                ->all();
+        if($countStores>0){
+            echo "<option>SELECT STORE</option>";
+            foreach ($stores as $store){
+                echo $store->name;
+                echo $form->field($model, 'shop_id')->checkboxList(yii\helpers\ArrayHelper::map(\app\models\Shops::find()->All(), 'id', 'brand.name'));
+                if(!empty($store->shops))
+                {
+                    foreach ($store->shops as $shop){
+                       
+                    }
+                }
+            }
+        }
+        else{
+            echo "<option>SELECT STORE</option>";
+            echo "<option>no store found</option>";
+        }
+    }
+    
 
     /**
      * Finds the Stores model based on its primary key value.

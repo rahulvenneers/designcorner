@@ -26,8 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             //'id',
             'name',
-            'address_line_1',
-            'address_line_2',
+            //'address_line_1',
+            //'address_line_2',
             'city',
             [
                 'attribute'=>'emirates_id',

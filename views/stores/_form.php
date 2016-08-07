@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'emirates_id')->textInput() ?>
+    <?= $form->field($model, 'emirates_id')->dropDownList(\yii\helpers\ArrayHelper::map(app\models\Emirates::find()->all(),'id','name')) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

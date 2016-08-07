@@ -35,12 +35,10 @@ class EmiratesController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new EmirartesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+       $model= Emirates::find()->all();
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'model' => $model,
         ]);
     }
 
@@ -61,18 +59,7 @@ class EmiratesController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
-        $model = new Emirates();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
+    
 
     /**
      * Updates an existing Emirates model.
@@ -99,12 +86,7 @@ class EmiratesController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
+    
 
     /**
      * Finds the Emirates model based on its primary key value.

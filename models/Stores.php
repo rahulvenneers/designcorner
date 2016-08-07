@@ -36,6 +36,7 @@ class Stores extends \yii\db\ActiveRecord
         return [
             [['name', 'address_line_1', 'address_line_2', 'city', 'emirates_id'], 'required'],
             [['emirates_id'], 'integer'],
+            [['is_deleted'],'string'],
             [['name', 'address_line_1', 'address_line_2', 'city'], 'string', 'max' => 20],
             [['emirates_id'], 'exist', 'skipOnError' => true, 'targetClass' => Emirates::className(), 'targetAttribute' => ['emirates_id' => 'id']],
         ];
@@ -53,6 +54,7 @@ class Stores extends \yii\db\ActiveRecord
             'address_line_2' => 'Address Line 2',
             'city' => 'City',
             'emirates_id' => 'Emirates Name',
+            'is_deleted' =>'status',
         ];
     }
 
@@ -69,7 +71,7 @@ class Stores extends \yii\db\ActiveRecord
      */
     public function getShops()
     {
-        return $this->hasMany(Shops::className(), ['store_id' => 'id']);
+        return $this->hasMany(Shops::className(), ['store_id' => 'id'])->orderBy(['brand_id' => SORT_ASC]);;
     }
 
     /**

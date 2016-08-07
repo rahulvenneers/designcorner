@@ -1,0 +1,56 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Aug 6, 2016, 10:54:18 AM
+    Author     : ho-5
+*/
+
+.emirate-name{
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    text-align: center;
+    font-size: 18px;
+}
+.emirate-name a{
+    text-decoration: none;
+}
+.store-name{
+     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    text-align: center;
+    font-size: 14px;
+   
+    margin-bottom: -30px;
+    z-index: 100;
+    position: relative;
+    
+   
+    
+}
+.store-name p{
+     margin: 0;
+     background: rgba(255,255,255,0.5);
+}
+
+.shop{
+    text-align: center;
+    color:white;
+    padding: 20px;
+    margin:0px;
+   
+}
+shop a {
+     text-decoration: none;
+}
+a {
+    text-decoration: none !important;
+}
+.shops{
+    padding: 5px;
+    margin: 5px;
+    margin-bottom: -10px;
+    position: relative;
+    
+   
+}

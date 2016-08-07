@@ -60,7 +60,7 @@ class StoresSearch extends Stores
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'emirates_id' => $this->emirates_id,
+            
         ]);
 
         $query->andFilterWhere(['like', 'stores.name', $this->name])
