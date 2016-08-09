@@ -126,7 +126,7 @@ class StoresController extends Controller
             echo "<option>no store found</option>";
         }
     }
-    public function actionListpromotion($id){
+    public function actionListprom($id){
         $countStores=  Stores::find()
                 ->where(['emirates_id'=>$id])
                 ->count();
@@ -134,22 +134,21 @@ class StoresController extends Controller
                 ->where(['emirates_id'=>$id])
                 ->all();
         if($countStores>0){
-            echo "<option>SELECT STORE</option>";
+            
             foreach ($stores as $store){
-                echo $store->name;
-                echo $form->field($model, 'shop_id')->checkboxList(yii\helpers\ArrayHelper::map(\app\models\Shops::find()->All(), 'id', 'brand.name'));
+                echo '<div class="store-name">'.$store->name.'</div>';
+               //$form->field($model, 'shop_id')->checkboxList(yii\helpers\ArrayHelper::map(\app\models\Shops::find()->All(), 'id', 'brand.name'));
                 if(!empty($store->shops))
                 {
+                    
                     foreach ($store->shops as $shop){
-                       
+                       echo '<div class="checkbox-group"><input type="checkbox" class="checkbox" id="checkbox'.$shop->id.'" name="promotion[]" value='.$shop->id.'><label for="checkbox'.$shop->id.'" class="checkbox-label">'.$shop->brand->name.'</label></div>';
                     }
                 }
+                
             }
         }
-        else{
-            echo "<option>SELECT STORE</option>";
-            echo "<option>no store found</option>";
-        }
+        
     }
     
 

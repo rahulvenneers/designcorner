@@ -56,10 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
               'attribute'=>'emirates_id',
                'value'=>'emirates.name',
             ],
-            [
-                'attribute'=>'store_id',
-                'value'=>'store.name',  
-            ],
+            
              [
                     'format'=>'image',
                    'value' => function ($model) {

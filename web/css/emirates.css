@@ -11,17 +11,24 @@ and open the template in the editor.
 .emirate-name{
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
+    width: 100%;
 }
 .emirate-name a{
     text-decoration: none;
+}
+.store{
+    
+    border: 1px solid red;
+    border-radius: 5px;
+    padding: 20px;
 }
 .store-name{
      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     text-align: center;
     font-size: 14px;
    
-    margin-bottom: -30px;
+    
     z-index: 100;
     position: relative;
     
@@ -29,7 +36,9 @@ and open the template in the editor.
     
 }
 .store-name p{
+    
      margin: 0;
+     
      background: rgba(255,255,255,0.5);
 }
 
@@ -49,8 +58,48 @@ a {
 .shops{
     padding: 5px;
     margin: 5px;
-    margin-bottom: -10px;
+    
     position: relative;
     
    
+}
+#store-details{
+    margin-top: 80px;
+}
+@media (min-width: 768px){
+  .seven-cols .col-md-1,
+  .seven-cols .col-sm-1,
+  .seven-cols .col-lg-1  {
+    width: 100%;
+    *width: 100%;
+  }
+}
+.btn-disable{
+        
+        pointer-events: none;
+
+        /*Button disabled - CSS color class*/
+        color: #c0c0c0;
+        background: grey !important;
+}
+@media (min-width: 992px) {
+  .seven-cols .col-md-1,
+  .seven-cols .col-sm-1,
+  .seven-cols .col-lg-1 {
+    width: 14.285714285714285714285714285714%;
+    *width: 14.285714285714285714285714285714%;
+  }
+}
+
+/**
+ *  The following is not really needed in this case
+ *  Only to demonstrate the usage of @media for large screens
+ */    
+@media (min-width: 1200px) {
+  .seven-cols .col-md-1,
+  .seven-cols .col-sm-1,
+  .seven-cols .col-lg-1 {
+    width: 14.285714285714285714285714285714%;
+    *width: 14.285714285714285714285714285714%;
+  }
 }

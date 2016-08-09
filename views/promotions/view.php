@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'start_date',
             'end_date',
             'emirates.name',
-            'store.name',
+            
             [
               'format'=>'image',
               'attribute'=>'permission_letter',

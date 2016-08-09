@@ -66,4 +66,19 @@ class Brands extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Shops::className(), ['brand_id' => 'id']);
     }
+    public function getClass()
+    {
+        if($this->id==1)
+        {
+            return "smartbaby";
+        }
+        else if($this->id==2)
+        {
+            return "eternity";
+        }
+        else
+        {
+            return "shop";
+        }
+    }
 }

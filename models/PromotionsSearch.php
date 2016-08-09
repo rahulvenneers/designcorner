@@ -19,7 +19,7 @@ class PromotionsSearch extends Promotions
     {
         return [
             [['id'], 'integer'],
-            [['promotion_code', 'name', 'discription', 'start_date', 'end_date', 'permission_letter', 'status', 'emirates_id', 'store_id'], 'safe'],
+            [['promotion_code', 'name', 'discription', 'start_date', 'end_date', 'permission_letter', 'status', 'emirates_id'], 'safe'],
         ];
     }
 
@@ -57,7 +57,7 @@ class PromotionsSearch extends Promotions
             return $dataProvider;
         }
         $query->joinWith('emirates');
-        $query->joinWith('store');
+        
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -70,7 +70,7 @@ class PromotionsSearch extends Promotions
             ->andFilterWhere(['like', 'discription', $this->discription])
             ->andFilterWhere(['like', 'permission_letter', $this->permission_letter])
             ->andFilterWhere(['like', 'emirates.name', $this->emirates_id])
-            ->andFilterWhere(['like', 'stores.name', $this->store_id])
+            
             ->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;

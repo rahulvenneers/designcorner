@@ -74,10 +74,25 @@ class PromotionsController extends Controller
                 $model->permission_letter='uploads/permission/'.$imageName.'.'.$model->permission->extension;
                 $model->permission->saveAs('uploads/permission/'.$imageName.'.'.$model->permission->extension);
               }
-             if($model->save()){
+              if($model->save()){
+                  if(isset($_POST['promotion']))
+                    {
+                    
+                    foreach ($_POST['promotion'] as $shop)
+                        {
+                            $details=new \app\models\PromotionDetails();
+                            $details->promotion_id=$model->id;
+                            $details->shop_id=$shop;
+                            $details->save();
+                        }
+                    }
+              return $this->redirect(['view', 'id' => $model->id]);
+              }
+              
+             //if($model->save()){
                  
-                    return $this->redirect(['view', 'id' => $model->id]);
-                }   
+                 //   
+               // }   
             }
          else {
             return $this->render('create', [

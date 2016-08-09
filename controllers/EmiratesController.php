@@ -36,9 +36,10 @@ class EmiratesController extends Controller
     public function actionIndex()
     {
        $model= Emirates::find()->all();
+       $brands=  \app\models\Brands::find()->all();
 
         return $this->render('index', [
-            'model' => $model,
+            'model' => $model,'brands'=>$brands,
         ]);
     }
 
@@ -79,7 +80,22 @@ class EmiratesController extends Controller
             ]);
         }
     }
-
+    public function actionStore($id) {
+        $emirate = $this->findModel($id);
+        $stores=$emirate->stores;
+        echo'<div class="row">';
+        foreach($stores as $store){
+            echo '<div class="store">';
+            echo'<div class="store-name">'.$store->name.'</div>';
+            echo '<div class="row">';
+            foreach($store->shops as $shop){
+                echo '<a href="index.php?r=shops/view&id='.$shop->id.'" ><div class="col-md-2 '.$shop->brand->class.' shop btn" style="background-color:'.$shop->brand->color_code.'">'.$shop->brand->name.'</div></a>';
+            }
+            echo'</div>';
+            echo '</div>';
+        }
+        echo '</div>';
+    }
     /**
      * Deletes an existing Emirates model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
