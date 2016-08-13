@@ -130,6 +130,44 @@ class PromotionsController extends Controller
             ]);
         }
     }
+    
+    public function dayleft($id)
+    {
+       $model = $this->findModel($id);
+       $date=  strtotime(date('Y-m-d'));
+                $endDate=  strtotime($model->end_date);
+                if($date<$endDate)
+                {
+                    ;
+                    $day=($endDate-$date)/86400;
+                    if($day<7){
+                       
+                    }
+                    
+                    return $day;
+                }
+                else{
+                    return 'end';
+                }
+    }
+    public function totaldays($id)
+    {
+       $model = $this->findModel($id);
+       $startdate=  strtotime(date($model->start_date));
+       $endDate=  strtotime($model->end_date);
+                if($startdate<$endDate)
+                {
+                    
+                    $day=($endDate-$startdate)/86400;
+                    if($day<7){
+                       
+                    }
+                    
+                    return $day;
+                }
+                
+                
+    }
 
     /**
      * Deletes an existing Promotions model.
@@ -142,6 +180,24 @@ class PromotionsController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+    
+    /**
+     * 
+     * @param type $id
+     * download permission letter for the perticular id
+     */
+    public function actionDownload($id)
+    {
+        $model = $this->findModel($id);
+        if (file_exists($model->permission_letter)) {
+
+            Yii::$app->response->sendFile($model->permission_letter);
+
+            } 
+            else{
+                $this->render('download404');
+            }	
     }
 
     /**

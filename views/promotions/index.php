@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PromotionsSearch */
@@ -20,9 +20,21 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'export'=>false,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            ['class' => 'kartik\grid\ExpandRowColumn',
+              'value' => function ($model, $key, $index, $column) {
+                         return GridView::ROW_COLLAPSED;
+              },
+                      'detail'=>function ($model, $key, $index, $column) {
+                                        return Yii::$app->controller->renderPartial('_promotion-details.php', ['model'=>$model]);
+                                },
+                                
+                    'detailOptions'=>[
+                        'class'=> 'kv-state-enable',
+                        ],
+            ],
             
             //'id',
             'promotion_code',

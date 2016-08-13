@@ -39,13 +39,13 @@ class Shops extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['contact_no', 'email_id', 'emirates_id', 'store_id', 'brand_id' ], 'required'],
+            [['contact_no', 'email_id', 'emirates_id', 'store_id', 'brand_id','manager','sqr_feet' ], 'required'],
             [['emirates_id', 'store_id', 'brand_id'], 'integer'],
-            
             [['is_delete'], 'string'],
             [['contact_no'], 'string', 'max' => 15],
+            [['sqr_feet'], 'string', 'max' => 10],
             [['email_id'], 'email'],
-            [['latitude', 'longitude'], 'string', 'max' => 20],
+            [['latitude', 'longitude','manager'], 'string', 'max' => 20],
             [['email_id'], 'unique'],
             [['store_id'], 'exist', 'skipOnError' => true, 'targetClass' => Stores::className(), 'targetAttribute' => ['store_id' => 'id']],
             [['brand_id'], 'exist', 'skipOnError' => true, 'targetClass' => Brands::className(), 'targetAttribute' => ['brand_id' => 'id']],
@@ -60,8 +60,10 @@ class Shops extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'manager'=>'Manager',
             'contact_no' => 'Contact No',
             'email_id' => 'Email ID',
+            'sqr_feet'=>'Square Feet',
             'emirates_id' => 'Emirates ID',
             'store_id' => 'Store ID',
             'brand_id' => 'Brand ID',
@@ -104,5 +106,8 @@ class Shops extends \yii\db\ActiveRecord
     }
     public function getMainboards(){
         return $this->hasMany(MainBoards::className(), ['shop_id' => 'id'])->where(['status'=>'live']);
+    }
+    public function getSalesignages(){
+        return $this->hasMany(SaleProSignages::className(), ['shop_id' => 'id']);
     }
 }

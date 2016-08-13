@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php
     foreach($model as $emirate){
        ?> 
-        <div class="col-md-1"><button class="emirate-name" value=<?=$emirate->id?>><?= $emirate->name; ?></button></div>
+        <div class="col-md-1"><button class="emirate-name" value="<?=$emirate->id;?>"><?= $emirate->name; ?></button></div>
         
    <?php }
     ?>

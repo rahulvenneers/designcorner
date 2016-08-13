@@ -43,6 +43,12 @@ class Promotions extends \yii\db\ActiveRecord
             [['discription', 'status'], 'string'],
             [['permission'], 'file', 'skipOnEmpty' => true],
             [['start_date', 'end_date'], 'safe'],
+            [['end_date'],
+                'compare',
+                'compareAttribute'=>'start_date',
+                'operator'=>'>', 
+                
+                'message'=>'{attribute} must be greater than "{compareValue}".'],
             [['emirates_id'], 'integer'],
             [['promotion_code'], 'string', 'max' => 15],
             [['name'], 'string', 'max' => 20],
@@ -94,4 +100,9 @@ class Promotions extends \yii\db\ActiveRecord
     public function getShops(){
         return $this->hasMany(PromotionDetails::className(), ['promotion_id'=>'id']);
     }
+    public function getSalesignages(){
+        return $this->hasMany(SaleProSignages::className(), ['pro_id'=>'id']);
+    }
+    
+    
 }

@@ -13,6 +13,8 @@ use yii\helpers\Url;
 
 
     <?php $form = ActiveForm::begin(); ?>
+    
+     <?= $form->field($model, 'manager')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'contact_no')->textInput(['maxlength' => true]) ?>
 
@@ -28,11 +30,11 @@ use yii\helpers\Url;
             ]); ?>
 
 
-    <?= $form->field($model, 'store_id')->dropDownList(['prompt'=>'Select Store']);?>
+    <?= $form->field($model, 'store_id')->dropDownList(\yii\helpers\ArrayHelper::map(\app\models\Stores::find()->all(),'id','name'),['prompt'=>'Select Store']);?>
 
     <?= $form->field($model, 'brand_id')->dropDownList(\yii\helpers\ArrayHelper::map(\app\models\Brands::find()->all(),'id','name')) ?>
 
-    
+     <?= $form->field($model, 'sqr_feet')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

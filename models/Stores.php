@@ -61,10 +61,7 @@ class Stores extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPromotions()
-    {
-        return $this->hasMany(Promotions::className(), ['store_id' => 'id']);
-    }
+    
 
     /**
      * @return \yii\db\ActiveQuery

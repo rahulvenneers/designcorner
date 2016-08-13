@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             //'id',
+            'manager',
             'contact_no',
             'email_id:email',
             [
@@ -39,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             
             'store.name',
+            'sqr_feet',
             //'brand_id',
            // 'latitude',
            // 'longitude',
@@ -69,7 +71,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <td>
                 <?=$promotion->promotion->status;?>
             </td>
-        <tr>
+            <td>
+            <?= Html::a('add collateral', ['/sale-pro-signages/create','pro_id'=>$promotion->promotion->id,'shop_id'=>$model->id], ['class'=>'btn btn-primary']) ?>
+            </td>
+        </tr>
+       
     <?php }
         echo "</table>";
         }else{
@@ -82,6 +88,19 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="row">
             <div class="col-sm-3">
     <h2>Signages</h2>
+    <h3>sale signages</h3>
+    <?php if(!empty($model->salesignages)){
+     foreach($model->salesignages as $signage){
+        ?>
+    <div class="col-xs-3">
+        <?=$signage->colType->name;?>
+        H<?=$signage->height;?>
+        W<?=$signage->width;?>
+        <?=$signage->pro->promotion_code;?>
+        <?php if($signage->status=="installed"){echo'<div class="status" style="background-color:green;"></div>';}else{echo'<div class="status" style="background-color:red;"></div>';}?>
+    </div>
+     <?php }}?>
+    
             </div>
             <div class="col-sm-9">
      <?= Html::a('Add Main board', ['mainboard', 'id' => $model->id], ['class' => 'btn btn-primary pull-right']) ?>

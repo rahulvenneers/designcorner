@@ -64,4 +64,5 @@ class PromotionDetails extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Promotions::className(), ['id' => 'promotion_id']);
     }
+    
 }
