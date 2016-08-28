@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+
 use Yii;
 
 /**
@@ -62,7 +63,6 @@ class PromotionDetails extends \yii\db\ActiveRecord
      */
     public function getPromotion()
     {
-        return $this->hasOne(Promotions::className(), ['id' => 'promotion_id']);
+        return $this->hasOne(Promotions::className(), ['id' => 'promotion_id'])->andOnCondition(['status'=>'ongoing']);
     }
-    
 }

@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use app\models\JointCollateral;
 
 /**
  * PromotionsController implements the CRUD actions for Promotions model.
@@ -102,7 +103,78 @@ class PromotionsController extends Controller
        
                 
     }
+    public function actionCreatejoincol($id)
+    {
+        $model = new JointCollateral();
+        $promotion=$this->findModel($id);
+        $pro_details=$promotion->promotionDetails;
+        $model->pro_id=$id;
+    if ($model->load(Yii::$app->request->post())) {
+        if ($model->validate()) {
+            
+            // form inputs are valid, do something here
+            if($model->save()){
+            if(isset($_POST['shop'])){
+            foreach ($_POST['shop'] as $shop)
+            {
+                $join= new \app\models\JointColDetails();
+                $join->pro_id=$id;
+                $join->shop_id=$shop;
+                $join->joint_col_id=$model->id;
+                $join->save();
+            }
+            }
+            }
+           return $this->redirect(['view','id'=>$id]);
+        }
+        
+    }
 
+    return $this->render('_formJoin', [
+        'model' => $model,'shops'=>$pro_details
+    ]);
+        
+    }
+    
+    
+    public function actionUpdatejoincol($id)
+    {
+        $model = JointCollateral::findOne(['id'=>$id]);
+        $promotion=$this->findModel($model->pro_id);
+        $pro_details=$promotion->promotionDetails;
+        foreach ($pro_details as $key=>$shop)
+        {
+            $col=  \app\models\JointColDetails::find()->where(['pro_id'=>$model->pro_id,'shop_id'=>$shop->shop->id,'joint_col_id'=>$model->id])->one();
+            if(!empty($col)){
+                unset($pro_details[$key]);
+            }
+        }
+    if ($model->load(Yii::$app->request->post())) {
+        if ($model->validate()) {
+            
+            // form inputs are valid, do something here
+            if($model->save()){
+            if(isset($_POST['shop'])){
+            foreach ($_POST['shop'] as $shop)
+            {
+                $join= new \app\models\JointColDetails();
+                $join->pro_id=$model->pro_id;
+                $join->shop_id=$shop;
+                $join->joint_col_id=$model->id;
+                $join->save();
+            }
+            }
+            }
+           return $this->redirect(['view','id'=>$model->pro_id]);
+        }
+        
+    }
+
+    return $this->render('_formJoin', [
+        'model' => $model,'shops'=>$pro_details
+    ]);
+        
+    }
     /**
      * Updates an existing Promotions model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -164,9 +236,7 @@ class PromotionsController extends Controller
                     }
                     
                     return $day;
-                }
-                
-                
+                }           
     }
 
     /**
@@ -181,7 +251,14 @@ class PromotionsController extends Controller
 
         return $this->redirect(['index']);
     }
-    
+    public function actionDeletejoinshop($id)
+    {
+        $joinshop=  \app\models\JointColDetails::findOne(['id'=>$id]);
+        $redirect=$joinshop->pro_id;
+        $joinshop->delete();
+        return $this->redirect(['view','id'=>$redirect]);
+    }
+
     /**
      * 
      * @param type $id

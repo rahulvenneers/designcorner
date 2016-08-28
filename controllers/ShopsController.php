@@ -76,6 +76,9 @@ class ShopsController extends Controller
             ]);
         }
     }
+    
+    
+
     public function actionMainboard($id)
     {
         $model = new MainBoards();
@@ -125,6 +128,7 @@ class ShopsController extends Controller
      * @param integer $id
      * @return mixed
      */
+    
     public function actionDelete($id)
     {
         $model = $this->findModel($id);

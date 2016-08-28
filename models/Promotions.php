@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 
+use yii\db\ActiveRecord;
 /**
  * This is the model class for table "promotions".
  *
@@ -22,7 +23,7 @@ use Yii;
  * @property Emirates $emirates
  * @property Stores $store
  */
-class Promotions extends \yii\db\ActiveRecord
+class Promotions extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -102,6 +103,9 @@ class Promotions extends \yii\db\ActiveRecord
     }
     public function getSalesignages(){
         return $this->hasMany(SaleProSignages::className(), ['pro_id'=>'id']);
+    }
+    public function getJoincol(){
+        return $this->hasMany(JointCollateral::className(), ['pro_id'=>'id']);
     }
     
     

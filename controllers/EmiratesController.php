@@ -87,7 +87,7 @@ class EmiratesController extends Controller
         foreach($stores as $store){
             echo '<div class="store">';
             echo'<div class="store-name">'.$store->name.'</div>';
-            echo '<div class="row">';
+            echo '<div class="row shops">';
             foreach($store->shops as $shop){
                 echo '<a href="index.php?r=shops/view&id='.$shop->id.'" ><div class="col-md-2 '.$shop->brand->class.' shop btn" style="background-color:'.$shop->brand->color_code.'">'.$shop->brand->name.'</div></a>';
             }

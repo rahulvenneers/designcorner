@@ -57,7 +57,7 @@ and open the template in the editor.
     background-color: #ab576c;
 }
 .checkbox:checked + .checkbox-label:before {
-    background-color: #fff;
+    background-color: #ab576c;
 }
 .checkbox-label:hover, .checkbox:focus + .checkbox-label {
   box-shadow: 0 0 20px rgba(0, 0, 0, .6);

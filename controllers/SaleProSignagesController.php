@@ -8,6 +8,7 @@ use app\models\SaleProSignagesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * SaleProSignagesController implements the CRUD actions for SaleProSignages model.
@@ -67,7 +68,13 @@ class SaleProSignagesController extends Controller
         $model->pro_id=$pro_id;
         $model->shop_id=$shop_id;
         if ($model->load(Yii::$app->request->post()) ) {
-             
+             $imageName=trim($model->id);
+            if($model->image = UploadedFile::getInstance($model, 'image'))
+            {
+                $model->design='uploads/signages/sale/'.$imageName.'.'.$model->image->extension;
+                $model->image->saveAs('uploads/brands/logo/'.$imageName.'.'.$model->image->extension);
+            }
+            $model->image=null;
             if( $model->save()){
                  return $this->redirect(['view', 'id' => $model->id]);
             }  
@@ -88,8 +95,17 @@ class SaleProSignagesController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())  ) {
+            $imageName=trim($model->id);
+            if($model->image = UploadedFile::getInstance($model, 'image'))
+            {
+                $model->design='uploads/signages/sale/'.$imageName.'.'.$model->image->extension;
+                $model->image->saveAs('uploads/signages/sale/'.$imageName.'.'.$model->image->extension);
+            }
+            $model->image=null;
+            if($model->save()){
             return $this->redirect(['view', 'id' => $model->id]);
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,

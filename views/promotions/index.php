@@ -70,10 +70,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             
              [
-                    'format'=>'image',
-                   'value' => function ($model) {
-                    return Html::a( '<img src="'.$model->permission_letter.'">',['/typology/view', 'id' => $model->id]);
-            },
+                    
+                
             ],
             'status',
             ['class' => 'yii\grid\ActionColumn', 'template' => '{view} ']

@@ -33,13 +33,15 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
         </div>
     <div class="row">
+        <div class=" brands">
         <?php
     foreach($brands as $brand){
        ?> 
-        <div class="col-md-2"><button class="btn active brand-name" value=<?=$brand->id?>><?= $brand->name; ?></button></div>
+            <button class="btn active brand-name" value="<?=$brand->id?>"><?=$brand->name; ?></button>
         
    <?php }
     ?>
+        </div>
     </div>
         
         <div id="store-details"></div>
