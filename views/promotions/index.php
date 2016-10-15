@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
-
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PromotionsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -20,8 +19,10 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+       
         'export'=>false,
         'filterModel' => $searchModel,
+        
         'columns' => [
             ['class' => 'kartik\grid\ExpandRowColumn',
               'value' => function ($model, $key, $index, $column) {
@@ -37,11 +38,46 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             
             //'id',
-            'promotion_code',
-            'name',
+                                        
+            [
+                'attribute'=>'promotion_code',
+                'options' => [ 'style' =>'background-color:#FF8B17;width:10%'],
+            ],                          
+            [
+                'attribute'=> 'name', 
+                'options' => [ 'style' =>'background-color:#EAEAEA;width:10%'],
+            ],
+            
             //'discription:ntext',
-            'start_date',
-            'end_date',
+            [
+                'attribute' => 'start_date',
+                'filterType' => GridView::FILTER_DATE,
+                'filterWidgetOptions' => [
+                    'options' => ['placeholder' => 'Enter date ...'], //this code not giving any changes in browser
+                    'type' =>  \kartik\date\DatePicker::TYPE_COMPONENT_APPEND,
+//
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'yyyy-m-dd'
+                    ],
+                ],
+               'options' => [ 'style' =>'background-color:#D1D1D1;width:20%;'], 
+            ],
+            
+             [
+                'attribute' => 'end_date',
+                'filterType' => GridView::FILTER_DATE,
+                'filterWidgetOptions' => [
+                    'options' => ['placeholder' => 'Enter date ...'], //this code not giving any changes in browser
+                    'type' =>  \kartik\date\DatePicker::TYPE_COMPONENT_APPEND,
+//
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'yyyy-m-dd'
+                    ],
+                ],
+                 'options' => [ 'style' =>'background-color:#D1D1D1;width:20%;'],
+            ],
             [
                 'attribute' => 'days to go',
                 'format' => 'raw',
@@ -50,30 +86,47 @@ $this->params['breadcrumbs'][] = $this->title;
                 $endDate=  strtotime($model->end_date);
                 if($date<$endDate)
                 {
-                    ;
+                    $color="";
                     $day=($endDate-$date)/86400;
-                    if($day<7){
-                       
+                    if($day<3){
+                       $color="red";
+                    }
+                    else if($day<7)
+                    {
+                        $color="orange";
                     }
                     
-                    return '<div >'.$day.'</div>';
+                    return '<div style="background-color:'.$color.';text-align:center">'.$day.'</div>';
                 }
                 else{
-                    return '<div>end</div>';
+                    return '<div style="text-align:center">ended</div>';
                 }
                 
             },
+            'options' => [ 'style' =>'text-align:center'],
             ],
             [
               'attribute'=>'emirates_id',
                'value'=>'emirates.name',
+                'filter' => [ 'Dubai' => 'Dubai', 'Sharjah' => 'Sharjah',],
+            
             ],
             
-             [
-                    
-                
+             
+            [
+                'class' => 'kartik\grid\EditableColumn',
+                'attribute'=>'status',
+                'options' => [ 'style' =>'background-color:#FF8B17;width:10%;'],           
+                'pageSummary' => true,
+                'editableOptions'=> [
+                    'header' => 'profile',
+                    'format' => \kartik\editable\Editable::FORMAT_BUTTON,
+                    'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
+                    'data'=> ['ongoing'=>'ongoing','ended'=>'ended'],
+       
+                 ],
+           'filter' => [ 'Ongoing' => 'ongoing', 'Ended' => 'ended',]
             ],
-            'status',
             ['class' => 'yii\grid\ActionColumn', 'template' => '{view} ']
 
             

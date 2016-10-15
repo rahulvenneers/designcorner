@@ -2,30 +2,44 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-
+use app\assets\PromotionAsset;
+use yii\helpers\Url;
+PromotionAsset::register($this);       
 /* @var $this yii\web\View */
 /* @var $model app\models\Promotions */
-
+?>
+<div class="container">
+<?php
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Promotions', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="promotions-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="row">
+    <div class="col-xs-8">
+            <h1><?= Html::encode($this->title) ?></h1>
+    </div>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
+<div class="col-xs-4 ">
+     <div class="btn-group pull-right">
+        <button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+        </button>
+         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+             <li><?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'dropdown-item']) ?></li>
+             <li><?= Html::a('Delete', ['delete', 'id' => $model->id], [
+            'class' => 'dropdown-item',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
-        ]) ?>
-        <?= Html::a('create join col', ['createjoincol', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        
-    </p>
+        ]) ?></li>
+             <li><?= Html::a('create join col', ['createjoincol', 'id' => $model->id], ['class' => 'dropdown-item']) ?></li>
+    </ul>
+  </div>
+</div>
+</div>
+
     <table class="table">
         <tr style="text-align: center">
             <th>
@@ -75,10 +89,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <td style="background-color: #282828">
                 <?=$model->end_date;?>
             </td>
-             <td>
+             <td style="color:#282828">
                 <?=$this->context->dayleft($model->id);?>
             </td>
-            <td>
+            <td style="color:#282828">
                 <?=$this->context->totaldays($model->id);?>
             </td>
             <td>
@@ -90,45 +104,82 @@ $this->params['breadcrumbs'][] = $this->title;
             </td>
         </tr>
     </table>
-    
+    <div class=" row pro-details">
+        <h3>Description</h3>
+        <?=$model->discription?>
+    </div>
     <div class="row">
+        <h4>Jointed Stores</h4>
     <?php foreach($shops as $shop){?>
-        <div class="col-md-6">
-            <div class="shop-detail">
-                <img src="<?= $shop->shop->brand->logo?>" class="img img-responsive">
-                <?=$shop->shop->store->name;?>
+        <div class="col-sm-4">
+            <div class="shop-detail" >
+                <a href="<?= Url::to(['shops/view','id'=>$shop->shop->id])?>"><img style="vertical-align:middle" src="<?= $shop->shop->brand->logo?>" class="img img-responsive" ></a>
+                <span ><?=$shop->shop->store->name;?></span>
             </div>
-            <div>
-                <?php foreach($shop->shop->salesignages as $signage){
-                    if($signage->pro_id==$model->id){
-                    echo '<div class="col-md-3">'.$signage->colType->name.'<br>';
-                    echo $signage->height.'<br>';
-                    echo $signage->width.'<br>';
-                    echo $signage->pro->promotion_code.'</div>';
-                }}
-?>
-            </div>
+          
         </div>
     <?php }?>
         
     </div>
-    <div style="background-color: grey;padding: 10px;">
+<div style="background-color:grey;padding: 10px;position: static; margin-top: 50px;" class="row">
         <h3>Join Collateral</h3>
         <?php foreach ($model->joincol as $join) {
-            echo $join->job_order;echo Html::a('update',array('/promotions/updatejoincol','id'=>$join->id)).'<br>';
-            foreach ($join->jointColDetails as $joinCol){
-            echo '<div style="display:inline;position:relative;">';
+             echo '<div class="col-sm-4" >';
+            ?>
+        <ul style="margin-left:-40px;">
+                <li class="list-group-item" style="height: 100px;"><a data-toggle="modal" href="#myModal<?=$join->id?>"><img id="imageresource" src="<?=$join->design?>" class="img img-responsive" alt="Trolltunga, Norway" style="height: 100px;text-align: center;margin: 0 auto;" ></a></li>
+                    <li class="list-group-item"><?=$join->colType->name;?></li>
+                    <li class="list-group-item">H<?=$join->height;?></li>
+                    <li class="list-group-item">W<?=$join->width;?></li>
+                    <li class="list-group-item"><?=$join->doneBy->name;?></li>
+                    <li class="list-group-item" style="height: 40px;"><?php if($join->status=="installed"){echo'<div class="status" style="background-color:green;"></div>';}else{echo'<div class="status" style="background-color:red;"></div>';}?><?php echo'<div style="margin-top:-20px;" >';?><?=Html::a('<span class="glyphicon glyphicon-pencil pull-right" aria-hidden="true"></span>',['/promotions/updatejoincol','id'=>$join->id]);?></div></li>
+                    
+            </ul>
+     
+            <?php
+           
+            if($join->jointColDetails){
                 
-               echo Html::img($joinCol->shop->brand->logo, ['alt'=>$joinCol->shop->store->name, 'class'=>'thing', 'data-toggle'=>'tooltip','data-placement'=>'left','title' => $joinCol->shop->store->name ,'style'=>'cursor:default;']);
-               echo '<div style="position:absolute;top: -16px; right:0px; z-index:10;">';
-               echo Html::a('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>',array('/promotions/deletejoinshop','id'=>$joinCol->id));
+            foreach ($join->jointColDetails as $joinCol){
+            echo '<div class="shop-button" style="display:inline;position:relative;">';
+               
+               echo Html::img($joinCol->shop->brand->logo, ['alt'=>$joinCol->shop->store->name, 'class'=>'thing', 'data-toggle'=>'tooltip','data-placement'=>'left','title' => $joinCol->shop->store->name ,'style'=>'cursor:default; ']);
+               
+               echo '<div class="shop-remove" >';
+               echo Html::a('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>',['/promotions/deletejoinshop','id'=>$joinCol->id],['data' => [
+                'confirm' => 'Are you sure you want to delete this item?',
+                
+            ]]);
                echo '</div>';
             echo '</div>';    
                 
             }
-            echo '<br>';
-    } ?>
+            
+            }
+            else{
+                echo '<div style="height:50px;"></div>';
+            }
+            echo '</div>';?>
+        <div class="modal fade" id="myModal<?=$join->id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" >
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title">Modal title</h4>
+    </div>
+    <div class="modal-body">
+        <img class="img-responsive" src="<?=$join->design?>" alt="image" />
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary">Save changes</button>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+ </div><!-- /.modal --> 
+
+    <?php } ?>
         
     </div>
-</div>  
-   
+  
+</div>

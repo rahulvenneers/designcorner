@@ -18,6 +18,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
+    <link rel="shortcut icon" href="favicon.ico" />
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
@@ -27,7 +28,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => 'Design Corner',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -56,7 +57,7 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="container">
+    <div class="container-fluid" >
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>

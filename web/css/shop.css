@@ -7,4 +7,51 @@ and open the template in the editor.
     Created on : Aug 17, 2016, 3:27:57 PM
     Author     : ho-5
 */
-
+.logo{
+    text-align: left;
+    
+}
+.details{
+    
+    
+      
+}
+.col-img{
+    height:100px;
+    text-align: center;
+   margin: auto;
+}
+.center{
+    text-align: center;
+     
+}
+.scrolls{
+    overflow-x: auto;
+		overflow-y: hidden;
+		height: 70px;
+                position: static;
+}
+.items{
+                margin: 0;
+		height: 70px;
+                max-width: 500px;
+               
+}
+.items img{
+    box-shadow: 1px 1px 10px #999; 
+		margin: 2px;
+		cursor: pointer;
+    display:inline-block;
+    
+        
+}
+.shop-details{
+    background-color: gray;
+    width: 100%;
+    left: 0;
+}
+@media screen and (max-width: 767px) {
+    .category{
+        text-align: right; 
+    }
+}

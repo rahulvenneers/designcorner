@@ -13,6 +13,9 @@ body {
 .wrap > .container {
     padding: 70px 15px 20px;
 }
+.wrap > .container-fluid {
+    padding: 70px 15px 20px;
+}
 
 .footer {
     height: 60px;
@@ -108,3 +111,8 @@ a.desc:after {
     float: left;
 }
 
+.home-menu {
+   text-decoration: none !important;
+   color: #282828;
+   font-size: 18px;
+}

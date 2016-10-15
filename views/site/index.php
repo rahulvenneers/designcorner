@@ -8,10 +8,10 @@ $this->title = 'My Yii Application';
 
     <div class="row">
         <div class="col-xs-6 home-page-btn">
-            <?= Html::a('promotions', ['/promotions/index'], ['class'=>'btn btn-primary']) ?>
+            <?= Html::a('promotions', ['/promotions/index'], ['class'=>'home-menu']) ?>
         </div>
         <div class="col-xs-6 home-page-btn">
-            <?= Html::a('signages', ['/emirates/index'], ['class'=>'btn btn-primary']) ?>
+            <?= Html::a('signages', ['/emirates/index'], ['class'=>'home-menu']) ?>
         </div>
     </div>
     

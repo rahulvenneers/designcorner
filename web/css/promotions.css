@@ -11,3 +11,23 @@ and open the template in the editor.
 .shop-detail{
     text-align: center;
 }
+.shop-button  a:hover{
+    z-index: 1000;
+    color: rgba(100, 100, 100,1);
+}
+
+.shop-remove{
+    position:absolute;
+    top: -16px;
+    right:0px;
+    
+}
+.shop-remove a{
+    color: rgba(100, 100, 100, 0.3);
+}
+.joint-details{
+    display: inline;
+}
+.joint-update a{
+    float: right;
+}

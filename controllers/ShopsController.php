@@ -77,7 +77,23 @@ class ShopsController extends Controller
         }
     }
     
-    
+    public function actionAddcol($id){
+        $model=new \app\models\ShopCollaterals();
+        $model->shop_id=$id;
+        if ($model->load(Yii::$app->request->post())) {
+            
+            if($model->save()){
+                return $this->redirect(['view', 'id' => $id]);
+            }
+            print_r($model->getErrors());
+                
+        }
+        else {
+            return $this->render('_formcol', [
+                'model' => $model
+            ]);
+        }
+    }
 
     public function actionMainboard($id)
     {
@@ -95,7 +111,7 @@ class ShopsController extends Controller
             if($model->save()){
             return $this->redirect(['view', 'id' => $model->shop_id]);
             }
-            echo" hai";
+            
         } else {
             return $this->render('mainboard', [
                 'model' => $model,'shop'=>$shop,

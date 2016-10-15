@@ -21,7 +21,10 @@
         "kartik-v/yii2-grid": "@dev",
         "kartik-v/yii2-widget-depdrop": "@dev",
         "kartik-v/yii2-widget-datepicker": "@dev",
-        "mpdf/mpdf": "@dev"
+        "mpdf/mpdf": "@dev",
+        "yiisoft/yii2-jui": "^2.0",
+        "yii2mod/yii2-bx-slider": "*",
+        "kartik-v/yii2-editable": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

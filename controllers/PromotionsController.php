@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use app\models\JointCollateral;
+use yii\helpers\Json;
 
 /**
  * PromotionsController implements the CRUD actions for Promotions model.
@@ -39,7 +40,19 @@ class PromotionsController extends Controller
     {
         $searchModel = new PromotionsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        if (Yii::$app->request->post('hasEditable')) {
+            $pro_id=Yii::$app->request->post('editableKey');
+            $pro=  Promotions::findOne($pro_id);
+            $out=Json::encode(['output'=>'','message'=>'']);
+            $post=[];
+            $posted=current($_POST['Promotions']);
+            $post['Promotions']=$posted;
+            if($pro->load($post)){
+                $pro->save();
+            }
+            echo $out;
+            return;
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -111,7 +124,7 @@ class PromotionsController extends Controller
         $model->pro_id=$id;
     if ($model->load(Yii::$app->request->post())) {
         if ($model->validate()) {
-            
+           
             // form inputs are valid, do something here
             if($model->save()){
             if(isset($_POST['shop'])){
@@ -142,6 +155,7 @@ class PromotionsController extends Controller
         $model = JointCollateral::findOne(['id'=>$id]);
         $promotion=$this->findModel($model->pro_id);
         $pro_details=$promotion->promotionDetails;
+        $imageName=$model->job_order;
         foreach ($pro_details as $key=>$shop)
         {
             $col=  \app\models\JointColDetails::find()->where(['pro_id'=>$model->pro_id,'shop_id'=>$shop->shop->id,'joint_col_id'=>$model->id])->one();
@@ -154,6 +168,14 @@ class PromotionsController extends Controller
             
             // form inputs are valid, do something here
             if($model->save()){
+                if($model->locationImage = UploadedFile::getInstance($model, 'locationImage')){
+                $model->loc_image='uploads/join/'.$imageName.'.'.$model->locationImage->extension;
+                $model->locationImage->saveAs('uploads/join/loc/'.$imageName.'.'.$model->locationImage->extension);
+              }
+              if($model->designImage = UploadedFile::getInstance($model, 'designImage')){
+                $model->design='uploads/join/'.$imageName.'.'.$model->designImage->extension;
+                $model->designImage->saveAs('uploads/join/img/'.$imageName.'.'.$model->designImage->extension);
+              }
             if(isset($_POST['shop'])){
             foreach ($_POST['shop'] as $shop)
             {
@@ -193,7 +215,17 @@ class PromotionsController extends Controller
             }
               
              if($model->save()){
-                 
+                    if(isset($_POST['promotion']))
+                    {
+                    
+                    foreach ($_POST['promotion'] as $shop)
+                        {
+                            $details=new \app\models\PromotionDetails();
+                            $details->promotion_id=$model->id;
+                            $details->shop_id=$shop;
+                            $details->save();
+                        }
+                    }
                     return $this->redirect(['view', 'id' => $model->id]);
                 }   
          } else {

@@ -133,6 +133,7 @@ class StoresController extends Controller
         $stores=Stores::find()
                 ->where(['emirates_id'=>$id])
                 ->all();
+        
         if($countStores>0){
             
             foreach ($stores as $store){

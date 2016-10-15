@@ -10,3 +10,12 @@ $(".promotion").click(function(){
     var cls='promotion'.concat(val);
     $('.'+cls).toggle();
 });
+
+$(document).ready(function(){
+  $('.slider1').bxSlider({
+    slideWidth: 200,
+    minSlides: 2,
+    maxSlides: 3,
+    slideMargin: 10
+  });
+});

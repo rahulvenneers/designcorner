@@ -88,7 +88,18 @@ class Shops extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Stores::className(), ['id' => 'store_id']);
     }
-
+    public function getShopcategory()
+    {
+        return $this->hasMany(ShopCategory::className(), ['shop_id' => 'id']);
+    }
+    public function getShopcol()
+    {
+        return $this->hasMany(ShopCollaterals::className(), ['shop_id' => 'id']);
+    }
+    public function getJoincol()
+    {
+        return $this->hasMany(JointColDetails::className(), ['shop_id' => 'id']);
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

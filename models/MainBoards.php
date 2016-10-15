@@ -47,7 +47,7 @@ class MainBoards extends \yii\db\ActiveRecord
             [['shop_id'], 'integer'],
             [['job_order', 'width', 'height'], 'string', 'max' => 15],
             [['out_source_name'], 'string', 'max' => 20],
-            [['image'], 'string', 'max' => 50],
+            [['image'], 'string', 'max' => 70],
             [['shop_id'], 'exist', 'skipOnError' => true, 'targetClass' => Shops::className(), 'targetAttribute' => ['shop_id' => 'id']],
         ];
     }
