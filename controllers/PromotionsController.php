@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use app\models\JointCollateral;
 use yii\helpers\Json;
+use kartik\mpdf\Pdf;
 
 /**
  * PromotionsController implements the CRUD actions for Promotions model.
@@ -167,13 +168,21 @@ class PromotionsController extends Controller
         if ($model->validate()) {
             
             // form inputs are valid, do something here
+            if($model->locationImage = UploadedFile::getInstance($model, 'locationImage')){
+                $model->loc_image='uploads/join/loc/'.$imageName.'.'.$model->locationImage->extension;
+                
+              }
+              if($model->designImage = UploadedFile::getInstance($model, 'designImage')){
+                $model->design='uploads/join/img/'.$imageName.'.'.$model->designImage->extension;
+                
+              }
             if($model->save()){
                 if($model->locationImage = UploadedFile::getInstance($model, 'locationImage')){
-                $model->loc_image='uploads/join/'.$imageName.'.'.$model->locationImage->extension;
+                
                 $model->locationImage->saveAs('uploads/join/loc/'.$imageName.'.'.$model->locationImage->extension);
               }
               if($model->designImage = UploadedFile::getInstance($model, 'designImage')){
-                $model->design='uploads/join/'.$imageName.'.'.$model->designImage->extension;
+                
                 $model->designImage->saveAs('uploads/join/img/'.$imageName.'.'.$model->designImage->extension);
               }
             if(isset($_POST['shop'])){

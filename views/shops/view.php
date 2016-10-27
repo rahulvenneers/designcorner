@@ -69,13 +69,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="container">
 <div class="row">
     <h2 class="col-md-12">Promotions</h2>
-    <table class="table table-responsive">
+    <table class="table ">
         <tr>
             
             <th>Name</th>
             <th>Start Date</th>
             <th>End Date</th>
             <th>Days to go</th>
+            <th>Status</th>
         </tr>
     <?php
     if(!empty($model->promotionDetails)){
@@ -84,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <tr>
             
             
-            <td style="background-color: #FF8B17">
+            <td style="background-color: #FF8B17;">
                 <?=$promotion->promotion->name;?>
             </td>
             <td>
@@ -173,7 +174,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <li class="list-group-item">W<?=$signage->width;?></li>
                                 <li class="list-group-item"><?=$signage->doneBy->name;?></li>
                                 <li class="list-group-item"><?php if($signage->status=="installed"){echo'<div class="status" style="background-color:green;"></div>';}else{echo'<div class="status" style="background-color:red;"></div>';}?></li>
-                                <li class="list-group-item"><?=Html::a('<span class="glyphicon glyphicon-pencil pull-right" aria-hidden="true"></span>',['/sale-pro-signages/update','id'=>$signage->id])?></li>
+                                <li class="list-group-item" style="height:40px;"><?=Html::a('<span class="glyphicon glyphicon-pencil pull-right" aria-hidden="true" ></span>',['/sale-pro-signages/update','id'=>$signage->id])?></li>
                             </ul>
                         
                             <?php } ?>
@@ -260,7 +261,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="col-xs-6 col-md-4 col-lg-3 center">
                  <li class="list-group-item"><?= Html::img($collateral->jointCol->design,['class'=>'img img-responsive col-img']);?></li>   
                 <li class="list-group-item"><?=$collateral->jointCol->height;?></li>
-                <li class="list-group-item scrolls"  ><div class="items bx-slider"><?php  foreach ($collateral->jointCol->jointColDetails as $part ){?>
+                <li class="list-group-item scrolls"  ><div class="items"><?php  foreach ($collateral->jointCol->jointColDetails as $part ){?>
                             
                     <?= Html::img($part->shop->brand->logo,['class'=>'slide']);?>
                 

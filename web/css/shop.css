@@ -35,13 +35,16 @@ and open the template in the editor.
                 margin: 0;
 		height: 70px;
                 max-width: 500px;
+                overflow-x: scroll;
+                display:inline-block !important;
                
 }
 .items img{
     box-shadow: 1px 1px 10px #999; 
 		margin: 2px;
 		cursor: pointer;
-    display:inline-block;
+    display:inline-block !important;
+    
     
         
 }
@@ -50,8 +53,12 @@ and open the template in the editor.
     width: 100%;
     left: 0;
 }
+.slide{
+    display:inline-block;
+}
 @media screen and (max-width: 767px) {
     .category{
         text-align: right; 
     }
 }
+

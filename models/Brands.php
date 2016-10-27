@@ -72,7 +72,7 @@ class Brands extends \yii\db\ActiveRecord
         {
             return "smartbaby";
         }
-        else if($this->id==2)
+        else if($this->id==3)
         {
             return "eternity";
         }

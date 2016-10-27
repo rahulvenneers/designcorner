@@ -129,10 +129,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <ul style="margin-left:-40px;">
                 <li class="list-group-item" style="height: 100px;"><a data-toggle="modal" href="#myModal<?=$join->id?>"><img id="imageresource" src="<?=$join->design?>" class="img img-responsive" alt="Trolltunga, Norway" style="height: 100px;text-align: center;margin: 0 auto;" ></a></li>
                     <li class="list-group-item"><?=$join->colType->name;?></li>
-                    <li class="list-group-item">H<?=$join->height;?></li>
-                    <li class="list-group-item">W<?=$join->width;?></li>
-                    <li class="list-group-item"><?=$join->doneBy->name;?></li>
-                    <li class="list-group-item" style="height: 40px;"><?php if($join->status=="installed"){echo'<div class="status" style="background-color:green;"></div>';}else{echo'<div class="status" style="background-color:red;"></div>';}?><?php echo'<div style="margin-top:-20px;" >';?><?=Html::a('<span class="glyphicon glyphicon-pencil pull-right" aria-hidden="true"></span>',['/promotions/updatejoincol','id'=>$join->id]);?></div></li>
+                    <li class="list-group-item">Height:<?=$join->height;?></li>
+                    <li class="list-group-item">Width:<?=$join->width;?></li>
+                    <li class="list-group-item">Company:<?=$join->doneBy->name;?></li>
+                    <li class="list-group-item" style="height: 40px;"><?php if($join->status=="installed"){echo'<div class="status" style="background-color:green;"></div>';}else{echo'<div class="status" style="background-color:red;"></div>';}?><?php echo'<div style="margin-top:-20px;text-align:center" >';?><a data-toggle="modal" href="#myModalLoc<?=$join->id?>"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></div><?php echo'<div style="margin-top:-20px;" >';?><?=Html::a('<span class="glyphicon glyphicon-pencil pull-right" aria-hidden="true"></span>',['/promotions/updatejoincol','id'=>$join->id]);?></div></li>
                     
             </ul>
      
@@ -162,18 +162,24 @@ $this->params['breadcrumbs'][] = $this->title;
             echo '</div>';?>
         <div class="modal fade" id="myModal<?=$join->id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog" >
-  <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title">Modal title</h4>
-    </div>
+  <div >
+    
     <div class="modal-body">
         <img class="img-responsive" src="<?=$join->design?>" alt="image" />
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button type="button" class="btn btn-primary">Save changes</button>
+   
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+ </div><!-- /.modal --> 
+ 
+ <div class="modal fade" id="myModalLoc<?=$join->id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" >
+  <div >
+    
+    <div class="modal-body">
+        <img class="img-responsive" src="<?=$join->loc_image?>" alt="image" />
     </div>
+   
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
  </div><!-- /.modal --> 

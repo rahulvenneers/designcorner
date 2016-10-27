@@ -30,6 +30,8 @@ class ShopCollaterals extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $designImage;
+    public $locationImage;
     public static function tableName()
     {
         return 'shop_collaterals';

@@ -7,12 +7,14 @@
 
     $( ".emirate-name" ).click(function() {
         var val = $(this).val();
+         $(".brand-name").closest('button').addClass("active");
     $.ajax({  
     type: 'GET',  
     url: 'index.php?r=emirates/store', 
     data: { id: val },
     success: function(response) {
        $('#store-details').html(response);
+      
     }
 });
     });
@@ -22,6 +24,7 @@
         $(this).toggleClass("active");
         if(val==1)
         $(".smartbaby").toggleClass("btn-disable");
-        if(val==2)
+        if(val==3)
         $(".eternity").toggleClass("btn-disable");
+        
     });

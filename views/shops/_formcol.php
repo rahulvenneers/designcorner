@@ -18,8 +18,8 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'nos')->textInput() ?>
         <?= $form->field($model, 'job_order')->textInput() ?>
         <?= $form->field($model, 'done_by')->dropDownList(\yii\helpers\ArrayHelper::map(\app\models\OutSourceCom::find()->all(), 'id', 'name'),['prompt'=>'select company']) ?>
-        <?= $form->field($model, 'design')->fileInput() ?>
-        <?= $form->field($model, 'location')->fileInput() ?>
+        <?= $form->field($model, 'designImage')->fileInput() ?>
+        <?= $form->field($model, 'locationImage')->fileInput() ?>
      
         <?= $form->field($model, 'status')->dropDownList([ 'active' => 'Active', 'removed' => 'Removed', ], ['prompt' => 'Select Status']) ?>
     

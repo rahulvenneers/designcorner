@@ -81,10 +81,19 @@ class ShopsController extends Controller
         $model=new \app\models\ShopCollaterals();
         $model->shop_id=$id;
         if ($model->load(Yii::$app->request->post())) {
+            if($model->locationImage = UploadedFile::getInstance($model, 'locationImage')){
+                $model->location='uploads/join/loc/'.$imageName.'.'.$model->locationImage->extension;
+                $model->locationImage->saveAs('uploads/join/loc/'.$imageName.'.'.$model->locationImage->extension);
+              }
+              if($model->designImage = UploadedFile::getInstance($model, 'designImage')){
+                $model->design='uploads/join/img/'.$imageName.'.'.$model->designImage->extension;
+                $model->designImage->saveAs('uploads/join/img/'.$imageName.'.'.$model->designImage->extension);
+              }
             
-            if($model->save()){
+                
+            //if($model->save()){
                 return $this->redirect(['view', 'id' => $id]);
-            }
+           // }
             print_r($model->getErrors());
                 
         }
